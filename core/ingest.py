@@ -70,7 +70,7 @@ if __name__ == "__main__":
     with open("doc.docx", "rb") as f:
         text = load_file(f)
 
-    chunks = chunk_text(text)
+    chunks = chunk_text(text)   
     print(f"Total chunks: {len(chunks)}")
     for i in range(len(chunks)):
         print(f"{i} chunk: {chunks[i]}")
