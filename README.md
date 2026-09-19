@@ -2,7 +2,7 @@
 
 A simple Retrieval-Augmented Generation (RAG) app: upload a document, ask questions about it, get answers grounded in its content — with a fallback to general knowledge when the document doesn't have the answer.
 
-##EXAMPLES
+## EXAMPLES
 <img width="2549" height="1354" alt="image" src="https://github.com/user-attachments/assets/05fee577-f73b-4fae-92c6-e6474b940423" />
 
 CHANGED THE DOCUMENT, CLEAR COLLECTION REMOVED THE OLD EMBEDDINGS 
