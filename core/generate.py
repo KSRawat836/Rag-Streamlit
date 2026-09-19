@@ -1,6 +1,6 @@
 import ollama
-from config import OLLAMA_MODEL
-from retrieve import retrieve
+from core.config import OLLAMA_MODEL
+from core.retrieve import retrieve
 
 def generate_answer(results,query):
     context = "\n".join(results['documents'][0])

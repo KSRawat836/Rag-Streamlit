@@ -1,8 +1,8 @@
 import pypdf
 import docx
-from config import CHUNK_SIZE, CHUNK_OVERLAP, VECTORDB_PATH, COLLECTION_NAME
+from core.config import CHUNK_SIZE, CHUNK_OVERLAP, VECTORDB_PATH, COLLECTION_NAME
 from sentence_transformers import SentenceTransformer
-from config import EMBEDDING_MODEL
+from core.config import EMBEDDING_MODEL
 import chromadb 
 
 # model for embedding the chunks
@@ -55,30 +55,20 @@ def embed_chunks(chunks: list[str]):
     embeddings = model.encode(chunks)
     return embeddings
 
+def clear_collection():
+    client = chromadb.PersistentClient(path=VECTORDB_PATH)
+    try:
+        client.delete_collection(name=COLLECTION_NAME)
+    except Exception:
+        pass
 
-def upsert_to_vectordb(embed: list[list[float]],chunks: list[str]):
-    ids=[]
-    for i in range(len(chunks)):
-        ids.append(f"chunk_{i}")
+def upsert_to_vectordb(embeddings, chunks, clear_first=True):
+    if clear_first:
+        clear_collection()
 
-    chro = chromadb.PersistentClient(path = VECTORDB_PATH)
-    collection=chro.get_or_create_collection(name= COLLECTION_NAME)
-    collection.add(ids= ids  , embeddings = embed, documents = chunks)
+    chro = chromadb.PersistentClient(path=VECTORDB_PATH)
+    collection = chro.get_or_create_collection(name=COLLECTION_NAME)
+    ids = [f"chunk_{i}" for i in range(len(chunks))]
+    collection.add(ids=ids, embeddings=embeddings, documents=chunks)
 
 
-if __name__ == "__main__":
-    with open("doc.docx", "rb") as f:
-        text = load_file(f)
-
-    chunks = chunk_text(text)    
-    print(f"Total chunks: {len(chunks)}")
-    for i in range(len(chunks)):
-        print(f"{i} chunk: {chunks[i]}")
-        print("\n")
-
-    embeddings = embed_chunks(chunks)
-    embed_list = embeddings.tolist()
-    print(type(embeddings))
-    print(embeddings.shape)
-    print(embeddings)
-    upsert_to_vectordb(embed_list, chunks)

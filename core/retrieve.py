@@ -1,6 +1,6 @@
 import chromadb
-from ingest import model
-from config import VECTORDB_PATH, COLLECTION_NAME, TOP_K
+from core.ingest import model
+from core.config import VECTORDB_PATH, COLLECTION_NAME, TOP_K
 
 def retrieve(query):
     query_embeddings  = model.encode([query])
@@ -13,4 +13,9 @@ def retrieve(query):
         )
     return results
 
+
+if __name__ == "__main__":
+    results = retrieve("Who organized the 1956 Dartmouth Conference?")
+    print(results['documents'])
+    print(results['distances'])
 
