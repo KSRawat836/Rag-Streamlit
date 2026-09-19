@@ -2,6 +2,15 @@
 
 A simple Retrieval-Augmented Generation (RAG) app: upload a document, ask questions about it, get answers grounded in its content — with a fallback to general knowledge when the document doesn't have the answer.
 
+##EXAMPLES
+<img width="2549" height="1354" alt="image" src="https://github.com/user-attachments/assets/05fee577-f73b-4fae-92c6-e6474b940423" />
+
+CHANGED THE DOCUMENT, CLEAR COLLECTION REMOVED THE OLD EMBEDDINGS 
+<img width="2549" height="1354" alt="image" src="https://github.com/user-attachments/assets/a11e137d-d65b-4ae8-8626-9c176a5cd164" />
+<img width="2549" height="1354" alt="image" src="https://github.com/user-attachments/assets/ca0efdac-007e-4f6f-b784-ac9d44291c3c" />
+
+
+
 ## How it works
 
 1. Upload a `.txt`, `.pdf`, or `.docx` file
@@ -88,3 +97,6 @@ Tunable values live in `core/config.py`:
 - Single document at a time — new uploads clear previous data
 - Local-only — no auth, no deployment config
 - 8B model can be imprecise at following exact-format instructions (e.g. the `NO_CONTEXT` signal), so fallback behavior isn't 100% reliable
+
+
+
