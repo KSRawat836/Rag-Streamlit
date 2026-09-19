@@ -14,6 +14,3 @@ def retrieve(query):
     return results
 
 
-if __name__ == "__main__":
-    results = retrieve("who is Zorblatt?")
-    print(results)
